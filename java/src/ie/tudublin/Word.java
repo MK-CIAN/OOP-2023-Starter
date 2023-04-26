@@ -5,50 +5,42 @@ import java.util.ArrayList;
 
 public class Word {
     private String word;
-    private ArrayList<Follow> follows = new ArrayList<Follow>();
-
-    @Override
-    public String toString() {
-        String s = "";
-        for(Follow f:follows)
-        {
-            s += "\t" + f + "\n";
-        }
-        return "Word [follows=" + follows + ", word=" + word + "]";
-    }
+    private ArrayList<Follow> follows;
 
     //Accesor methods and contructors to a toString() that iterates through the arraylist
-    public Word(TableRow tr)
+    public void addFollow(String word)
     {
-        this(
-            tr.getString("word")
-        );
+        for(Follow f:follows)
+        {
+            if(f.getWord().equals(word))
+            {
+                f.countPlus();
+                return;
+            }
+        }
+        follows.add(new Follow(word, 0));
     }
 
     public Word(String word) {
         this.word = word;
+        this.follows = new ArrayList<Follow>();
     }
 
     public String getWord() {
-        return word;
+        return this.word;
     }
 
     public ArrayList<Follow> getFollows() {
-        return follows;
+        return this.follows;
     }
 
-    public void addFollow(Follow f)
+    public String toString()
     {
-        follows.add(f);
-    }
-
-    public void addFollow(String word, int count)
-    {
-        Follow f = new Follow(word, count);
-        addFollow(f);
-    }
-
-    public void setFollows(ArrayList<Follow> follows) {
-        this.follows = follows;
+        String s = word + ": ";
+        for(Follow f:follows)
+        {
+            s += f.toString() + ", ";
+        }
+        return s;
     }
 }

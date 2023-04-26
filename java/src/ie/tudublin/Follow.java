@@ -5,11 +5,6 @@ public class Follow
     private String word;
     private int count;
 
-    @Override
-    public String toString() {
-        return "Follow [count=" + count + ", word=" + word + "]";
-    }
-
     //Accesser methods and construcets to a toString()
 
     public Follow(String word, int count) {
@@ -21,10 +16,18 @@ public class Follow
         return word;
     }
 
+    public String toString()
+    {
+        return word + ": " + count;
+    }
+
     public int getCount() {
         return count;
     }
 
-    public void setCount(int i) {
+    public void countPlus()
+    {
+        this.count++;
     }
+    
 }
