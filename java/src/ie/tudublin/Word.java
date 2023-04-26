@@ -37,19 +37,6 @@ public class Word {
         return follows;
     }
 
-    public void findFollow(String word)
-    {
-        for(Follow f:follows)
-        {
-            if(f.getWord().equals(word))
-            {
-                f.setCount(f.getCount() + 1);
-                return;
-            }
-        }
-        addFollow(word, 1);
-    }
-
     public void addFollow(Follow f)
     {
         follows.add(f);
@@ -61,9 +48,7 @@ public class Word {
         addFollow(f);
     }
 
-    public void replaceAllFollows(ArrayList<Follow> newFollows)
-    {
-        follows.clear();
-        follows.addAll(newFollows);
+    public void setFollows(ArrayList<Follow> follows) {
+        this.follows = follows;
     }
 }

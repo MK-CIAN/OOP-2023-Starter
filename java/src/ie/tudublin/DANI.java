@@ -1,22 +1,22 @@
 package ie.tudublin;
 
-import java.util.ArrayList;
-
+import java.util.*;
+import java.io.*;
 import processing.core.PApplet;
+
 
 public class DANI extends PApplet {
 
+	String[] sonnet;
+	private ArrayList<Word> words = new ArrayList<Word>();
+
 	public void loadfile()
 	{
-		
-		//Spiltting the string into an array
-		String[] line = loadStrings("small.txt");
-		String[] sonnet = new String[0];
-		for(String s:line)
+		String[] lines = loadStrings("small.txt");
+		for(String line: lines)
 		{
-			sonnet = line[0].replaceAll("[^a-zA-Z ]", "").toLowerCase().split(line[0], ' ');
+			String[] words = split(line, ' ');
 		}
-		printString(sonnet);
 	}
 
 	public void settings() {
