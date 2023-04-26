@@ -7,6 +7,13 @@ import processing.core.PApplet;
 public class DANI extends PApplet {
 
 	
+	public void loadfile()
+	{
+		String line  = loadStrings("small.txt");
+		split(line, " ");
+		w.replaceAll("[^a-zA-Z0-9]", "");
+		s.toLowerCase();
+	}
 
 	public void settings() {
 		size(1000, 1000);
