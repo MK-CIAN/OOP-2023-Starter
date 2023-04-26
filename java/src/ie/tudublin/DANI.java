@@ -9,6 +9,7 @@ public class DANI extends PApplet {
 	String[] sonnet;
 	private ArrayList<Word> list = new ArrayList<Word>();
 
+	//Loading the file and splitting it into words
 	public void loadfile()
 	{
 		String[] lines = loadStrings("small.txt");
@@ -40,6 +41,7 @@ public class DANI extends PApplet {
 		}
 	}
 
+	//Getting the word from the list
 	public Word getWord(String str)
 	{
 		for(Word word:list)
@@ -63,7 +65,7 @@ public class DANI extends PApplet {
 		for (Word word:list)
 		{
 			System.out.print(word.getWord() + ": ");
-			for(Follow f:word.getFollows())
+			for(Follow f:word.getFollow())
 			{
 				System.out.print(f.getWord() + "(" + f.getCount() + ") ");
 			}
@@ -79,6 +81,7 @@ public class DANI extends PApplet {
 		sonnet = createSonnet();
 	}
 
+	//If key is pressed, create a new sonnet
 	public void keyPressed() {
 		if (key == ' ')
 		{
@@ -90,17 +93,17 @@ public class DANI extends PApplet {
 		}
 	}
 
+	//Creating a sonnet
 	public String[] createSonnet()
 	{
 		String[] sonnet = new String[14];
 		for (int i = 0; i < sonnet.length; i++)
 		{
-			Word wordCurr = list.get((int) random(list.size()));
 			String line = "";
-			line = wordCurr.getWord();
-			for(int j = 0; j < 7; j++)
+			Word wordCurr = list.get((int) random(list.size()));
+			for(int j = 0; j < 8; j++)
 			{
-				ArrayList<Follow> follows = wordCurr.getFollows();
+				ArrayList<Follow> follows = wordCurr.getFollow();
 				if(follows.size() == 0)
 				{
 					break;
@@ -116,6 +119,7 @@ public class DANI extends PApplet {
 
 	float off = 0;
 
+	//Drawing the sonnet
 	public void draw() 
     {
 		background(0);

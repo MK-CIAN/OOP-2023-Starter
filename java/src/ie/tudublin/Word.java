@@ -30,12 +30,7 @@ public class Word {
     public String getWord() {
         return this.word;
     }
-
-    public ArrayList<Follow> getFollows() {
-        return this.follow;
-    }
-
-
+    
     public String toString()
     {
         String s = word + ": ";

@@ -9,12 +9,12 @@ public class Follow
 
     public Follow(String word, int count) {
         this.word = word;
-        this.count = 0;
+        this.count = count;
     }
 
 
     public String getWord() {
-        return this.word;
+        return word;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class Follow
     }
 
     public int getCount() {
-        return this.count;
+        return count;
     }
 
     public void countPlus(int count)
