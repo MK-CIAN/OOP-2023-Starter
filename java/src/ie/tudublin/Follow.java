@@ -9,25 +9,27 @@ public class Follow
 
     public Follow(String word, int count) {
         this.word = word;
-        this.count = count;
+        this.count = 0;
     }
+
 
     public String getWord() {
-        return word;
+        return this.word;
     }
 
+    @Override
     public String toString()
     {
         return word + ": " + count;
     }
 
     public int getCount() {
-        return count;
+        return this.count;
     }
 
-    public void countPlus()
+    public void countPlus(int count)
     {
-        this.count++;
+        this.count = count;
     }
     
 }

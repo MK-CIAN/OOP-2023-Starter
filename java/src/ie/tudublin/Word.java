@@ -1,46 +1,62 @@
 package ie.tudublin;
 
-import processing.data.TableRow;
 import java.util.ArrayList;
 
 public class Word {
     private String word;
-    private ArrayList<Follow> follows;
+    private ArrayList<Follow> follow;
 
     //Accesor methods and contructors to a toString() that iterates through the arraylist
+    public Word(String word, ArrayList<Follow> follow) {
+        this.word = word;
+        this.follow = new ArrayList<Follow>();
+    }
+
     public void addFollow(String word)
     {
-        for(Follow f:follows)
+        for(int i = 0; i < follow.size(); i++)
         {
-            if(f.getWord().equals(word))
+            if(follow.get(i).getWord().equals(word))
             {
-                f.countPlus();
+
+                follow.get(i).countPlus(follow.get(i).getCount() + 1);
                 return;
             }
         }
-        follows.add(new Follow(word, 0));
+        follow.add(new Follow(word, 1));
     }
 
-    public Word(String word) {
-        this.word = word;
-        this.follows = new ArrayList<Follow>();
-    }
 
     public String getWord() {
         return this.word;
     }
 
     public ArrayList<Follow> getFollows() {
-        return this.follows;
+        return this.follow;
     }
+
 
     public String toString()
     {
         String s = word + ": ";
-        for(Follow f:follows)
+        for(Follow follow : follow)
         {
-            s += f.toString() + ", ";
+            s += follow.toString() + ", ";
         }
         return s;
     }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    public ArrayList<Follow> getFollow() {
+        return follow;
+    }
+
+    public void setFollow(ArrayList<Follow> follow) {
+        this.follow = follow;
+    }
+
+    
 }

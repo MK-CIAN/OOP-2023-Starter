@@ -24,12 +24,16 @@ public class DANI extends PApplet {
 				Word word = getWord(wordList);
 				if(word == null)
 				{
-					word = new Word(wordList);
+					word = new Word(wordList, null);
 					list.add(word);
 				}
 				if(i < words.length - 1)
 				{
 					String next = words[i + 1];
+					if(next.length() == 0)
+					{
+						continue;
+					}
 					word.addFollow(next);
 				}
 			}
@@ -58,21 +62,56 @@ public class DANI extends PApplet {
 	{
 		for (Word word:list)
 		{
-			System.out.println(word.getWord() + ":");
+			System.out.print(word.getWord() + ": ");
 			for(Follow f:word.getFollows())
 			{
-				System.out.print(f.getWord() + "(" + f.getCount() + "), ");
+				System.out.print(f.getWord() + "(" + f.getCount() + ") ");
 			}
+			System.out.println();
 		}
 	}
 
 	public void setup() {
 		colorMode(HSB);
 		loadfile();
+		printSonnet();
+
+		sonnet = createSonnet();
 	}
 
 	public void keyPressed() {
+		if (key == ' ')
+		{
+			sonnet = createSonnet();
+			for(int i = 0; i < sonnet.length; i++)
+			{
+				System.out.println(sonnet[i]);
+			}
+		}
+	}
 
+	public String[] createSonnet()
+	{
+		String[] sonnet = new String[14];
+		for (int i = 0; i < sonnet.length; i++)
+		{
+			Word wordCurr = list.get((int) random(list.size()));
+			String line = "";
+			line = wordCurr.getWord();
+			for(int j = 0; j < 7; j++)
+			{
+				ArrayList<Follow> follows = wordCurr.getFollows();
+				if(follows.size() == 0)
+				{
+					break;
+				}
+				Follow follow = follows.get((int) random(follows.size()));
+				line += " " + follow.getWord();
+				wordCurr = getWord(follow.getWord());
+			}
+			sonnet[i] = line;
+		}
+		return sonnet;
 	}
 
 	float off = 0;
@@ -84,6 +123,16 @@ public class DANI extends PApplet {
 		noStroke();
 		textSize(20);
         textAlign(CENTER, CENTER);
+
+		float x = width / 2;
+		float y = height / 2;
+		float lineSpacing = height  / 40;
+
+		for (int i = 0; i < sonnet.length; i++)
+		{
+			text(sonnet[i], x,y);
+			y += lineSpacing;
+		}
         
 	}
 }
